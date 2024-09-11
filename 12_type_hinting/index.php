@@ -20,8 +20,8 @@ class Base {
         echo "Hello! from Base::greet()\n";
     }
 
-    public function printName($name) {
-        foreach ($name->names() as $n)
+    public function printName(OtherBase $names) {
+        foreach ($names->names() as $n)
             echo $n . "\n";
     }
 }
@@ -41,12 +41,16 @@ function useObject(OtherBase $obj) {
     $obj->bye();
 }
 
+class ICC {
+    
+}
+
 useObject(new OtherBase());
 
 $obj = new OtherBase();
 
 $useObj = new Base();
-
+$cricket = new ICC();
 $useObj->printName($obj);
 
 ?>
