@@ -4,6 +4,7 @@
 // require "first.php";
 // require "second.php";
 
+
 function __autoload($class) {
     require "./17_autoload/" . $class . ".php";
 }
