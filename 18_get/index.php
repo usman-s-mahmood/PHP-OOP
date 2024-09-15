@@ -9,8 +9,8 @@ class Base {
     public function __get($property) {
         if (array_key_exists($property, $this->arr))
         {
-            echo $this->data[$property] . "\n";
-            return $this->data[$property];
+            echo $this->arr[$property] . "\n";
+            return $this->arr[$property];
         }
         else
         {
@@ -22,7 +22,7 @@ class Base {
 }
 
 $obj1 = new Base();
-echo $obj1->python;
+echo $obj1->c;
 print_r($obj1->test); // used for printing array or associative array
 
 $test_arr = [
