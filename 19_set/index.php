@@ -26,6 +26,6 @@ function main() {
     $obj1->display();
 }
 
-main()
+main();
 
 ?>
