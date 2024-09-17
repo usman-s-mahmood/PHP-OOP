@@ -1,0 +1,11 @@
+<?php
+
+
+function main() {
+    ;
+}
+
+main();
+
+
+?>
