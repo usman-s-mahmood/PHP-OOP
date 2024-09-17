@@ -6,13 +6,14 @@ class Base {
         $this->name = $name;
     }
     public function __invoke() {
-        echo "This data member can't be called as a function!\n";
+        echo "Object of class " . __class__ . "\n";
+        print_r($this);
     }
 }
 
-function main() {
+function main() { // invoke magic method is used to return an output if an object of that class is being called as a function
     $obj1 = new Base("Usman Shahid");
-    $obj1->name();
+    $obj1();
 }
 
 main();
