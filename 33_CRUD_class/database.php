@@ -6,8 +6,31 @@ class Database {
         $port = 3306,
         $user = "root",
         $database = "php_db",
-        $password = "";
+        $password = "",
+        $conn = false,
+        $mysqli = null,
+        $result = array();
     public function __construct() {
+        // checking if connection exists or not
+        if (!$this->conn) {
+            $this->mysqli = new mysqli(
+                $host = $this->host,
+                $user = $this->user,
+                $password = $this->password,
+                $database = $this->database,
+                $port = $this->port
+            );
+
+            if ($this->mysqli->connect_error) {
+                array_push(
+                    $this->result,
+                    $this->mysqli->connect_error
+                );
+                return false;
+            }
+            else
+                return true;
+        }
 
     }
 
@@ -28,7 +51,13 @@ class Database {
     }
 
     public function __destruct() {
-
+        if ($this->conn)
+            if ($this->mysqli->close()) {
+                $this->conn = false;
+                return true;
+            }
+        else
+            return false;
     }
 }
 
