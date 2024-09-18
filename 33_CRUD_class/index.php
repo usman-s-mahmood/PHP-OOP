@@ -44,7 +44,13 @@ function main() {
         $where = "id=7"
     );
     print_r($obj->getResult()); */
-    
+
+    /* This method is working fine
+    $obj->delete(
+        $table = 'users',
+        $where = "email='test3dit@mail.com'"
+    );
+    print_r($obj->getResult()); */
 }
 
 main();

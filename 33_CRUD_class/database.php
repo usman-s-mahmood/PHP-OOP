@@ -95,8 +95,29 @@ class Database {
             return false;
     }
 
-    public function delete() {
-
+    public function delete($table, $where=null) {
+        if ($this->tableExists($table)) {
+            $sql = "DELETE FROM $table";
+            if ($where != null)
+                $sql .= " WHERE $where;";
+            echo $sql . "\n";
+            if ($this->mysqli->query($sql)) {
+                array_push(
+                    $this->result,
+                    $this->mysqli->affected_rows
+                );
+                return true;
+            }
+            else {
+                array_push(
+                    $this->result,
+                    $this->mysqli->error
+                );
+                return false;
+            }
+        }
+        else
+            return false;
     }
 
     public function select() {
