@@ -2,6 +2,11 @@
 
 
 class Database {
+    private $host = "localhost",
+        $port = 3306,
+        $user = "root",
+        $database = "php_db",
+        $password = "";
     public function __construct() {
 
     }
@@ -23,7 +28,7 @@ class Database {
     }
 
     public function __destruct() {
-        
+
     }
 }
 
