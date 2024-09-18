@@ -18,7 +18,8 @@ function main() {
     // echo "Current Date time: " . implode(', ', getdate()) . "\n";
     // $date = getdate();
     // echo getdate()["mday"] . "-" . $date["mon"] . "-" . $date["year"] . "\n";
-    $date = getdate()["year"] . "-" . getdate()["mon"] . "-" . getdate()["mday"];
+    $date = getdate()["year"] . "-" . getdate()["mon"] . "-" . getdate()["mday"]; /*
+    // The below code works fine
     $obj->insert(
         'users',
         [
@@ -31,7 +32,19 @@ function main() {
             'created_at' => $date
         ]
     );
-    print_r($obj->getResult());
+    print_r($obj->getResult()); */
+    /*
+    // This code is working as expected
+    $obj->update(
+        $table = 'users',
+        $params = [
+            'username' => 'another_user_edit',
+            'email' => 'test3dit@mail.com'
+        ],
+        $where = "id=7"
+    );
+    print_r($obj->getResult()); */
+    
 }
 
 main();

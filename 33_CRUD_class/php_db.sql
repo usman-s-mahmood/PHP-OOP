@@ -53,3 +53,5 @@ VALUES
 ('Alice', 'alice@example.com', 'Hello, I need help with my account.'),
 ('Bob', 'bob@example.com', 'I have a question about your services.'),
 ('Charlie', 'charlie@example.com', 'Great website! Keep it up.');
+
+select * from users;

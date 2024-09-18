@@ -64,8 +64,35 @@ class Database {
             return false;
     }
 
-    public function update() {
-
+    public function update($table, $params=array(), $where=null) {
+        if ($this->tableExists($table)) {
+            // print_r($params);
+            $args = array();
+            foreach ($params as $key => $value)
+                $args[] = "$key = '$value'";
+            // echo "Updated Array is: \n";
+            // print_r($args);
+            $sql = "UPDATE $table SET " . implode(', ', $args);
+            if ($where != null)
+                $sql .= " WHERE $where;";
+            // echo $sql . "\n";
+            if ($this->mysqli->query($sql)) {
+                array_push(
+                    $this->result, 
+                    $this->mysqli->affected_rows
+                );
+                return true;
+            }
+            else {
+                array_push(
+                    $this->result,
+                    $this->mysqli->error
+                );
+                return false;
+            }
+        }
+        else 
+            return false;
     }
 
     public function delete() {
