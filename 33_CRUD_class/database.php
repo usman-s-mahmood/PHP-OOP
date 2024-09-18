@@ -20,7 +20,7 @@ class Database {
                 $database = $this->database,
                 $port = $this->port
             );
-
+            $this->conn = true;
             if ($this->mysqli->connect_error) {
                 array_push(
                     $this->result,
