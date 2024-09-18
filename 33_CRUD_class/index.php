@@ -51,6 +51,21 @@ function main() {
         $where = "email='test3dit@mail.com'"
     );
     print_r($obj->getResult()); */
+
+    // $obj->sql("select * from users where id=8;");
+    // print_r($obj->getResult());
+
+    $obj->select(
+        $table="users",
+        $row="username",
+        $join="posts on users.id=posts.user_id",
+        $where="users.id != 0",
+        $order=" users.id desc",
+        $limit=3
+    );
+
+    print_r($obj->getResult());
+
 }
 
 main();
