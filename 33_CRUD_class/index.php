@@ -80,7 +80,7 @@ function main() {
     echo $obj->pagination(
         $table="users",
         $columns="username, id",
-        null, 
+        $join=null, 
         $where="users.id != 0", 
         $order="users.id desc",
         $limit=3

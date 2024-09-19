@@ -148,7 +148,7 @@ class Database {
     }
 
 
-    public function pagination($table, $columns, $join=null, $where=null, $order=null, $limit=null) {
+    public function pagination($table, $columns="*", $join=null, $where=null, $order=null, $limit=null, $print_data=false) {
         if ($this->tableExists($table)) {
             if ($limit != null) {
                 $sql = "SELECT COUNT(*) FROM $table ";
@@ -158,8 +158,8 @@ class Database {
                 //     $sql .= " JOIN $join";
                 if ($order != null)
                     $sql .= " ORDER BY $order";
-                echo $sql;
-                echo "<br>$table, $join, $where, $order, $limit<br>";
+                // echo $sql;
+                // echo "<h1>Passed Params: </h1><br>$table, $join, $where, $order, $limit<br>";
                 $query = $this->mysqli->query($sql);
                 $total_records = $query->fetch_array();
                 // print_r($total_records);
@@ -199,8 +199,9 @@ class Database {
                     $order=$order,
                     $limit=$limit
                 );
-                print_r($this->getResult());
-                echo "<br>";
+                if ($print_data)
+                    print_r($this->getResult());
+                // echo "<br>";
                 return $output . "<br>";
             }
             else
