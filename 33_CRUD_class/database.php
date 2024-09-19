@@ -120,17 +120,24 @@ class Database {
             return false;
     }
 
-    public function select($table, $rows="*", $join=null, $where=null, $order=null, $limit=null) {
+    public function select($table, $columns="*", $join=null, $where=null, $order=null, $limit=null) {
         if ($this->tableExists($table)) {
-            $sql = "SELECT $rows FROM $table ";
+            $sql = "SELECT $columns FROM $table ";
             if ($join != null)
                 $sql .= " JOIN $join ";
             if ($where != null)
                 $sql .= " WHERE $where ";
             if ($order != null)
                 $sql .= " ORDER BY $order ";
-            if ($limit != null)
-                $sql .= " LIMIT $limit ";
+            if ($limit != null) {
+                // $page = null;
+                if (isset($_GET["page"]))
+                    $page = $_GET['page'];
+                else
+                    $page = 1;
+                $start = ($page - 1) * $limit;
+                $sql .= " LIMIT $start, $limit ";
+            }
             $sql .= ";";
             
             // echo $sql . "\n";
@@ -138,6 +145,62 @@ class Database {
         }
         else
             return false;
+    }
+
+
+    public function pagination($table, $join=null, $where=null, $order=null, $limit=null) {
+        if ($this->tableExists($table)) {
+            if ($limit != null) {
+                $sql = "SELECT COUNT(*) FROM $table ";
+                if ($where != null)
+                    $sql .= " WHERE $where";
+                // if ($join =! null)
+                //     $sql .= " JOIN $join";
+                if ($order != null)
+                    $sql .= " ORDER BY $order";
+                echo $sql;
+                echo "<br>$table, $join, $where, $order, $limit<br>";
+                $query = $this->mysqli->query($sql);
+                $total_records = $query->fetch_array();
+                // print_r($total_records);
+                $total_records = $total_records[0];
+                // echo $total_records;
+                $total_pages = ceil($total_records / $limit);
+                $url = basename($_SERVER['PHP_SELF']);
+                // $page = null;
+                if (isset($_GET["page"]))
+                    $page = $_GET['page'];
+                else
+                    $page = 1;
+                $start = ($page - 1) * $limit;
+                $output = "<ul class=\"pagination\">";
+                if ($page > 1) {
+                    $setPage = $page - 1;
+                    $output .= "<li><a href=\"$url?page=$setPage\">Previous</a></li>";
+                }
+                if ($total_records > $limit)
+                    for ($i = 1; $i <= $total_pages; $i++) {
+                        if ($i == $page)
+                            $cls = "class=\"active\"";
+                        else
+                            $cls = "";
+                        $output .= "<li><a $cls href=\"$url?page=$i\">$i</a></li>";
+                    }
+                if ($total_pages > $page) {
+                    $setPage = $page + 1;
+                    $output .= "<li><a href=\"$url?page=$setPage\">Next</a></li>";        
+                }
+                $output .= "</ul>";
+                
+                return $output . "<br>";
+            }
+            else
+                echo "First False<br>";
+                // return false;
+        }
+        else
+            echo "second False<br>";
+            // return false;
     }
 
     private function sql($sql) {
@@ -189,7 +252,5 @@ class Database {
             return false;
     }
 }
-
-
 
 ?>

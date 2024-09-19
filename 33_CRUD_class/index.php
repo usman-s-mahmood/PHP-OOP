@@ -55,16 +55,38 @@ function main() {
     // $obj->sql("select * from users where id=8;");
     // print_r($obj->getResult());
 
+    // $obj->select(
+    //     $table="users",
+    //     $row="username",
+    //     $join="posts on users.id=posts.user_id",
+    //     $where="users.id != 0",
+    //     $order=" users.id desc",
+    //     $limit=2
+    // );
+
+    // print_r($obj->getResult());
+
+
     $obj->select(
         $table="users",
-        $row="username",
-        $join="posts on users.id=posts.user_id",
+        $columns="username",
+        $join=null,
         $where="users.id != 0",
-        $order=" users.id desc",
+        $order="users.id desc",
         $limit=3
     );
-
     print_r($obj->getResult());
+    echo "<br>";
+    echo $obj->pagination(
+        $table="users",
+        null, 
+        null, 
+        null,
+        3
+    );
+    // ($table, $join=null, $where=null, $order=null, $limit=null)
+
+    // print_r($obj->getResult());
 
 }
 
