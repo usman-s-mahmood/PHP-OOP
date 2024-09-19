@@ -148,7 +148,7 @@ class Database {
     }
 
 
-    public function pagination($table, $join=null, $where=null, $order=null, $limit=null) {
+    public function pagination($table, $columns, $join=null, $where=null, $order=null, $limit=null) {
         if ($this->tableExists($table)) {
             if ($limit != null) {
                 $sql = "SELECT COUNT(*) FROM $table ";
@@ -191,7 +191,16 @@ class Database {
                     $output .= "<li><a href=\"$url?page=$setPage\">Next</a></li>";        
                 }
                 $output .= "</ul>";
-                
+                $this->select(
+                    $table=$table,
+                    $columns=$columns,
+                    $join=$join,
+                    $where=$where,
+                    $order=$order,
+                    $limit=$limit
+                );
+                print_r($this->getResult());
+                echo "<br>";
                 return $output . "<br>";
             }
             else

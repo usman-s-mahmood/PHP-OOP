@@ -67,22 +67,23 @@ function main() {
     // print_r($obj->getResult());
 
 
-    $obj->select(
-        $table="users",
-        $columns="username",
-        $join=null,
-        $where="users.id != 0",
-        $order="users.id desc",
-        $limit=3
-    );
-    print_r($obj->getResult());
+    // $obj->select(
+    //     $table="users",
+    //     $columns="username",
+    //     $join=null,
+    //     $where="users.id != 0",
+    //     $order="users.id desc",
+    //     $limit=3
+    // );
+    // print_r($obj->getResult());
     echo "<br>";
     echo $obj->pagination(
         $table="users",
+        $columns="username, id",
         null, 
-        null, 
-        null,
-        3
+        $where="users.id != 0", 
+        $order="users.id desc",
+        $limit=3
     );
     // ($table, $join=null, $where=null, $order=null, $limit=null)
 
