@@ -140,7 +140,7 @@ class Database {
             }
             $sql .= ";";
             
-            // echo $sql . "\n";
+            echo $sql . "\n";
             $this->sql($sql);
         }
         else

@@ -54,3 +54,7 @@ VALUES
 ('Bob', 'bob@example.com', 'I have a question about your services.'),
 ('Charlie', 'charlie@example.com', 'Great website! Keep it up.');
 
+
+select * from posts order by id desc;
+SELECT * FROM posts JOIN users on posts.user_id = users.id ORDER BY posts.id desc;
+
